@@ -1,0 +1,76 @@
+{% extends "network/layout.html" %} 
+{% load static %} 
+{% block body %}
+<h1>{{ profile_user }}'s Profile Page</h1>
+
+	{% if user.is_authenticated %} 
+
+		{% if user != profile_user %}
+		 	{% if has_followed %}
+				<form action="/users/{{ profile_user.id }}/unfollow" method="post">
+					{% csrf_token %}
+					<button class="btn btn-sm btn-primary">Unfollow</button>
+				</form>
+			{% else %}
+				<form action="/users/{{ profile_user.id }}/follow" method="post">
+					{% csrf_token %}
+					<button class="btn btn-sm btn-primary">Follow</button>
+				</form>
+			{% endif %}
+		{% endif %}
+		
+		<div class="follow-count-wrapper">
+			{% if followers %}
+				<span class="followers-count-wrapper">Followers: {{ followers | length }}</span>
+				<span>Following: {{ following | length }}</span>
+			{% else %}
+				<span class="followers-count-wrapper">Followers: 0</span>
+				<span>Following: {{ following | length }}</span>
+			{% endif %}
+		</div>
+		
+
+		<h3>Posts:</h3>
+		<div class="profile-posts-container border rounded">
+			{% for post in page_obj %}
+				<div class="one-post-container border rounded" data-post-id="{{ post.id }}">
+				
+					<div class="profile-one-post-info-wrapper">
+						<div class="post-content">{{ post.content }}</div>
+					
+						{% if user == post.user %}
+						<form class="edit-post-form" action="/users/{{ user.id }}" method="post" style="display: none;">
+							{% csrf_token %}
+							<textarea class="form-control">{{ post.content }}</textarea>
+							<button class="btn btn-sm btn-primary save-post-btn">Save</button>
+						</form>
+						{% endif %}
+						
+						<div class="one-post-timestamp" data-timestamp="{{ post.timestamp | date:'U'}}">
+							{{ post.timestamp  }}
+						</div>
+					</div>
+					
+					<div class="profile-one-post-btns-wrapper">
+						{% if user == post.user %}
+						<div class="profile-one-post-btn">
+							<button class="btn btn-sm btn-outline-primary edit-post-btn">Edit</button>
+						</div>
+						<div class="profile-one-post-btn">
+							<button class="btn btn-sm btn-outline-danger delete-post-btn">Delete</button>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			{% endfor %}	
+		</div>
+
+		{% include "network/pagination.html" %}
+	
+	{% endif %}
+
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'network/post.js' %}"></script>
+{% endblock %}

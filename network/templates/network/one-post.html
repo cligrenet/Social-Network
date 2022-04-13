@@ -1,0 +1,66 @@
+{% for post in page_obj %}
+    <div class="one-post-container border rounded" data-post-id="{{ post.id }}">
+        
+        <div class="one-post-info-wrapper">
+            <span class="one-post-author">
+                {% if user.is_authenticated %} 
+                    <a href="/users/{{ post.user.id }}">{{ post.user }}</a>
+                {% else %}
+                    <span>{{ post.user }}</span>
+                {% endif %}
+            </span>
+
+            <div class="post-content">{{ post.content }}</div>
+
+            <div >
+                {% if user == post.user %}
+                    <form class="edit-post-form" action="/posts/{{ post.id }}" method="post" style="display: none;">
+                        {% csrf_token %}
+                        <textarea class="form-control">{{ post.content }}</textarea>
+                        <button class="btn btn-sm btn-primary save-post-btn">Save</button>
+                    </form>
+                {% endif %}
+            </div>
+            
+            <!-- Use client-side time stamp (with daylight saving) -->
+            <div class="one-post-timestamp" data-timestamp="{{ post.timestamp | date:'U'}}">
+                {{ post.timestamp  }}
+            </div>
+            
+
+            {% if user.is_authenticated %} 
+                {% if user == post.user %}
+                    <div class="deactivate-like-post">
+                        <span class="deactive-like-icon">❤️</span> 
+                        <span class="like-count">0</span>
+                    </div>
+                {% else %}
+                    <button class="like-post btn btn-link {% if post in liked_posts %}liked{% endif %}">
+                        <span class="like-post-icon liked">❤️</span>
+                        <span class="like-post-icon like-icon-outline">♡</span>
+                    </button>
+                    <span class="like-count">{{ post.likes_count }}</span>
+                {% endif %}
+            {% else %}
+                <div>❤️ <span class="like-count">{{ post.likes_count }}</span></div>
+            {% endif %}
+        </div>
+        
+    
+        <div class="btns-wrapper">
+            {% if user == post.user %}
+            <div class="one-post-btn">
+                <button class="btn btn-sm btn-outline-primary edit-post-btn">Edit</button>
+            </div>
+            <div class="one-post-btn">
+                <button class="btn btn-sm btn-outline-danger delete-post-btn">Delete</button>
+            </div>
+            {% endif %}
+            <form action="" method="" class="one-post-btn">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-outline-success comment-btn">Comment</button>
+            </form>	
+        </div>
+    
+    </div>
+{% endfor %}

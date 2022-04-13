@@ -1,0 +1,159 @@
+:root {
+	--color1: #E3FDFD;
+	--color2: #CBF1F5;
+	--color3: #A6E3E9;
+	--color4: #71C9CE;
+	--light-grey: #F8F9FA;
+	--grey: gray;
+
+
+}
+
+/******** Index page ********/
+.body {
+	padding: 15px;
+}
+
+.new-post-container {
+	padding: 15px 15px 5px 15px;
+}
+
+.new-post-submit-btn {
+	margin-top: 5px;
+}
+
+.one-post-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 10px; 
+	padding: 10px;
+	animation-name: hide;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.one-post-author {
+	font-size: larger;
+	font-weight: bold;
+}
+
+.one-post-timestamp {
+	font-size: small;
+	color: var(--grey);
+}
+
+.one-post-like {
+	font-size: small;
+	color: var(--grey);
+}
+
+.btns-wrapper {
+	display: flex;
+}
+
+.btns-wrapper-item {
+	margin-left: 4px;
+}
+
+.one-post-info-wrapper {
+	line-height: 1.5;
+}
+
+
+.one-post-btn {
+	margin-left: 4px;
+}
+
+.deactivate-like-post {
+	margin-left: 15px;
+	
+}
+
+.deactive-like-icon {
+	margin-right: 10px;
+}
+
+.post-content {
+	margin-top: 5px;
+}
+
+
+.like-icon-outline{
+	color: red;
+}
+
+.like-post .like-post-icon {
+	display: inline-block;
+}
+
+.like-post .like-post-icon.liked {
+	display:none;
+}
+
+.like-post.liked .like-post-icon {
+	display: none;
+}
+
+.like-post.liked .like-post-icon.liked {
+	display: inline-block;
+}
+
+/* delete post animation */
+@keyframes hide {
+    0% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+		margin: 10px;
+		padding: 10px;
+    }
+    75% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+		margin: 10px;
+		padding: 10px;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+		margin: 0px;
+		padding: 0px;
+    }
+}
+	
+
+
+/******** Profile page ********/
+
+.profile-posts-container {
+	margin-bottom: 5px;
+}
+
+.profile-one-post {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.profile-one-post-info-wrapper{
+	line-height: 1.5;
+}
+
+.profile-one-post-btns-wrapper{
+	display: flex;
+}
+
+.profile-one-post-btn {
+	margin-left: 4px;
+}
+
+.follow-count-wrapper {
+	margin: 1em 0;
+}
+
+.followers-count-wrapper {
+	margin-right: 1em;
+}

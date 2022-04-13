@@ -1,0 +1,15 @@
+{% extends "network/layout.html" %} 
+{% load static %} 
+
+{% block body %}
+    <div class="posts-container mb-3 border rounded">
+        {% include "network/one-post.html" %}
+    </div>
+
+    {% include "network/pagination.html" %}
+
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'network/post.js' %}"></script>
+{% endblock %}
