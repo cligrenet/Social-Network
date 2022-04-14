@@ -32,4 +32,5 @@ This small project uses Django as backend framework, (Django integrated) SQLite 
 ```sh
 http://127.0.0.1:8000/
 ```
-
+## Demo Link
+https://youtu.be/QXqqvpYsQGs
